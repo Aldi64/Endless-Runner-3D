@@ -4,8 +4,17 @@ public class Chunk : MonoBehaviour
 {
     [SerializeField] private float length = 30f;
 
-    public float Length => length;
+    private Coin[] coins;
 
-    // Set by the spawner so the chunk knows which pool it returns to.
+    public float Length => length;
     public Chunk Prefab { get; set; }
+
+    private void Awake() => coins = GetComponentsInChildren<Coin>(true);
+
+    // Runs each time the pool hands this chunk out again.
+    private void OnEnable()
+    {
+        foreach (Coin coin in coins)
+            coin.gameObject.SetActive(true);
+    }
 }

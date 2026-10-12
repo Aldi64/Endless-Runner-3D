@@ -2,8 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+
+
 public class ChunkSpawner : MonoBehaviour
 {
+    [SerializeField] private int safeChunksAtStart = 2;
+    private int spawnedCount;
     [SerializeField] private Transform player;
     [SerializeField] private Chunk[] chunkPrefabs;
     [SerializeField] private float spawnAheadDistance = 120f;
@@ -52,7 +56,10 @@ public class ChunkSpawner : MonoBehaviour
 
     private void SpawnChunk()
     {
-        Chunk prefab = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+        Chunk prefab = spawnedCount < safeChunksAtStart
+    ? chunkPrefabs[0]
+    : chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
+        spawnedCount++;
         Chunk chunk = pools[prefab].Get();
         chunk.transform.position = new Vector3(0f, 0f, nextSpawnZ);
         activeChunks.Enqueue(chunk);
