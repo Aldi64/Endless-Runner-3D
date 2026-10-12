@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chunk
   length: 30
+  tier: 1
 --- !u!1 &3271788589139871237
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chunk
   length: 30
+  tier: 0
 --- !u!1001 &2805125593541595117
 PrefabInstance:
   m_ObjectHideFlags: 0

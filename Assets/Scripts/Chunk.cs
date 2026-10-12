@@ -3,7 +3,8 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     [SerializeField] private float length = 30f;
-
+    [SerializeField] private int tier = 0;
+    public int Tier => tier;
     private Coin[] coins;
 
     public float Length => length;

@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3764be2bfa81618428f6e627c0a56276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  referenceSpeed: 10
   forwardSpeed: 10
   steerSpeed: 8
   steerAcceleration: 12
@@ -1331,15 +1332,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71920b762d8b33419b871f5df333448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChunkSpawner
-  safeChunksAtStart: 2
   player: {fileID: 586351727}
   chunkPrefabs:
   - {fileID: 2307169676840577667, guid: 7cc77c8a1e089f84aae70775ebbfd0ff, type: 3}
   - {fileID: 8849934273406061144, guid: 88d28068d3ab6124fb524bd3796cbaa4, type: 3}
   - {fileID: 881103607825102573, guid: ccc4aab6428162646ad3fa0c5af30108, type: 3}
   - {fileID: 881103607825102573, guid: 665de0129d3f4ad46a0352894e964d98, type: 3}
+  - {fileID: 881103607825102573, guid: 89d2a1bd0732a96438bb2db9cc69a1ef, type: 3}
+  - {fileID: 881103607825102573, guid: de746170e537b4e49a4487435a74b5c8, type: 3}
+  - {fileID: 881103607825102573, guid: 20b972485af5d094996d3cc53a647f9d, type: 3}
+  - {fileID: 881103607825102573, guid: eccb5c1c0ccd5f048b5b8f1596d68b80, type: 3}
   spawnAheadDistance: 120
   despawnBehindDistance: 30
+  safeChunksAtStart: 2
+  distancePerTier: 60
 --- !u!4 &1548781607
 Transform:
   m_ObjectHideFlags: 0

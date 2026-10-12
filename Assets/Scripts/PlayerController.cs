@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
+    [SerializeField] private float referenceSpeed = 10f;
     [SerializeField] private float forwardSpeed = 10f;
     [SerializeField] private float steerSpeed = 8f;
     [SerializeField] private float steerAcceleration = 12f;
@@ -25,7 +26,8 @@ public class PlayerController : MonoBehaviour
         currentSteer = Mathf.MoveTowards(currentSteer, targetSteer, steerAcceleration * Time.deltaTime);
 
         Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(pos.x + currentSteer * steerSpeed * Time.deltaTime, -halfWidth, halfWidth);
+        float steerScale = Mathf.Sqrt(forwardSpeed / referenceSpeed);
+        pos.x = Mathf.Clamp(pos.x + currentSteer * steerSpeed * steerScale * Time.deltaTime, -halfWidth, halfWidth);
         pos.z += forwardSpeed * Time.deltaTime;
         transform.position = pos;
     }
