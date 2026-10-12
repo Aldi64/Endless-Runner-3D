@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private const string BestScoreKey = "BestScore";
+
     public static GameManager Instance { get; private set; }
 
     [Header("References")]
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     private int lastScore = -1;
 
     public int Coins { get; private set; }
+    public int BestScore { get; private set; }
     public int Score => Mathf.FloorToInt(player.transform.position.z) + Coins * pointsPerCoin;
     public bool IsGameOver { get; private set; }
 
@@ -29,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         Application.targetFrameRate = 60;
+        BestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
     }
 
     private void Start()
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
         player.SetForwardSpeed(Mathf.Min(baseSpeed + speedGainPerSecond * elapsed, maxSpeed));
 
         int score = Score;
-        if (score != lastScore) // only touch the UI when the number changes
+        if (score != lastScore)
         {
             lastScore = score;
             ui.SetScore(score);
@@ -68,8 +72,26 @@ public class GameManager : MonoBehaviour
         if (IsGameOver) return;
         IsGameOver = true;
         player.enabled = false;
-        ui.ShowGameOver(Score);
+
+        int finalScore = Score;
+        bool isNewBest = finalScore > BestScore;
+        if (isNewBest)
+        {
+            BestScore = finalScore;
+            PlayerPrefs.SetInt(BestScoreKey, BestScore);
+            PlayerPrefs.Save(); // on mobile, don't rely on the app closing cleanly
+        }
+
+        ui.ShowGameOver(finalScore, BestScore, isNewBest);
     }
 
     public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    // Handy for testing: use the three-dot menu on this component in the Inspector.
+    [ContextMenu("Reset Best Score")]
+    private void ResetBestScore()
+    {
+        PlayerPrefs.DeleteKey(BestScoreKey);
+        BestScore = 0;
+    }
 }
