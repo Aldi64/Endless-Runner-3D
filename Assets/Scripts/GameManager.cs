@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameOver) return;
         Coins++;
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayCoin();
     }
 
     public void GameOver()
@@ -73,13 +76,19 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
         player.enabled = false;
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayGameOver();
+            AudioManager.Instance.StopMusic();
+        }
+
         int finalScore = Score;
         bool isNewBest = finalScore > BestScore;
         if (isNewBest)
         {
             BestScore = finalScore;
             PlayerPrefs.SetInt(BestScoreKey, BestScore);
-            PlayerPrefs.Save(); // on mobile, don't rely on the app closing cleanly
+            PlayerPrefs.Save();
         }
 
         ui.ShowGameOver(finalScore, BestScore, isNewBest);
