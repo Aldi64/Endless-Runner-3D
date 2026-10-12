@@ -681,12 +681,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3764be2bfa81618428f6e627c0a56276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  referenceSpeed: 10
   forwardSpeed: 10
   steerSpeed: 8
   steerAcceleration: 12
   halfWidth: 3.5
+  referenceSpeed: 10
   steerAction: {fileID: 7762657673733895086, guid: 3cac97b32bd763944933781d41b109de, type: 3}
+  pressAction: {fileID: 8980546079687529023, guid: 3cac97b32bd763944933781d41b109de, type: 3}
+  dragAction: {fileID: -5144342603094699911, guid: 3cac97b32bd763944933781d41b109de, type: 3}
+  dragSensitivity: 1.5
 --- !u!54 &586351729
 Rigidbody:
   m_ObjectHideFlags: 0

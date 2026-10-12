@@ -25,7 +25,11 @@ public class GameManager : MonoBehaviour
     public int Score => Mathf.FloorToInt(player.transform.position.z) + Coins * pointsPerCoin;
     public bool IsGameOver { get; private set; }
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        Instance = this;
+        Application.targetFrameRate = 60;
+    }
 
     private void Start()
     {
